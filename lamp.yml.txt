@@ -1,0 +1,23 @@
+---
+- name: Deploy LAMP stack and PHP application
+  hosts: 192.168.56.11
+  become: true
+  tasks:
+    - name: Copy the deploy script to the remote server
+      copy:
+        src: lamp.sh
+        dest: /tmp/lamp.sh
+        mode: '0755'
+
+    - name: Execute the deploy script
+      command: /tmp/lamp.sh
+
+    - name: Verify that the PHP application is accessible
+      uri:
+        url: http://{{ ansible_host }}
+        return_content: yes
+      register: webpage
+
+    - name: Ensure the application webpage is accessible
+      debug:
+        msg: "The application is accessible at http://{{ ansible_host }} and returned: {{ webpage.content }}"

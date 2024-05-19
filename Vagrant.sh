@@ -8,12 +8,7 @@ Vagrant.configure("2") do |config|
     master.vm.hostname = "master"
     master.vm.network "private_network", ip: "192.168.56.10"
 
-    # Provisioning script for master
-    #master.vm.provision "shell", inline: <<-SHELL
-    #  sudo apt-get update
-    #  sudo apt-get install -y apache2
-    #  echo "This is the master server" > /var/www/html/index.html
-    #SHELL
+  
   end
 
   # Define the slave VM
@@ -22,11 +17,6 @@ Vagrant.configure("2") do |config|
     slave.vm.hostname = "slave"
     slave.vm.network "private_network", ip: "192.168.56.11"
 
-    # Provisioning script for slave
-    #slave.vm.provision "shell", inline: <<-SHELL
-    #  sudo apt-get update
-    #  sudo apt-get install -y apache2
-    #  echo "This is the slave server" > /var/www/html/index.html
-    #SHELL
+    
   end
 end
